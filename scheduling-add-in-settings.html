@@ -17,7 +17,7 @@
         </div>
         <div class="main-content__footer">
             <label class="checkbox-container">
-                <input class="checkbox" type="checkbox" id="inviteAlways">
+                <input class="checkbox" type="checkbox" id="alwaysInvite">
                 <span class="checkmark"></span>
             </label>
             <div class='main-content__footer-text main-content__footer-title'>
@@ -30,7 +30,7 @@
 <script>
     /* global Office */
     Office.onReady(function () {
-        const checkbox = document.getElementById('inviteAlways');
+        const checkbox = document.getElementById('alwaysInvite');
 
         const addGongAutomatically = localStorage.getItem('linkedin-add-in_always_invite_gong');
         if (addGongAutomatically != null && addGongAutomatically === 'true') {
