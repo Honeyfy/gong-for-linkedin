@@ -57,6 +57,7 @@
     line-height: 24px;
     color: #222326;
     font-size: 13px;
+    overflow-wrap: normal;
 }
 
 .main-content__footer-subtitle {

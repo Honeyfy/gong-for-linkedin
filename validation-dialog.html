@@ -52,7 +52,7 @@
             </label>
             <div class='main-content__footer-text'>
                 <div class='main-content__footer-title'>
-                    Always invite Gong to my customer meetings
+                    Always invite Gong coordinator to my customer meetings
                 </div>
                 <div class='main-content__footer-subtitle'>
                     You can change this selection in the settings.
@@ -68,12 +68,12 @@
         const validationDialog = document.getElementById('gongValidationDialog');
         const noBtn = validationDialog.getElementsByClassName('no-btn')[0];
         noBtn.addEventListener('click', function () {
-            Office.context.ui.messageParent('no');
+            Office.context.ui.messageParent(false);
         });
 
         const yesBtn = validationDialog.getElementsByClassName('yes-btn')[0];
         yesBtn.addEventListener('click', function () {
-            Office.context.ui.messageParent('yes');
+            Office.context.ui.messageParent(true);
         });
 
         const checkbox = validationDialog.getElementsByClassName('always-invite')[0];

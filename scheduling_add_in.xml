@@ -23,20 +23,20 @@
             <Set Name="Mailbox" MinVersion="1.1"/>
         </Sets>
     </Requirements>
-    <FormSettings>
+    <!--<FormSettings>
         <Form xsi:type="ItemRead">
             <DesktopSettings>
                 <SourceLocation DefaultValue="https://gong-for-linkedin.s3.amazonaws.com/settings.html"/>
                 <RequestedHeight>250</RequestedHeight>
             </DesktopSettings>
         </Form>
-    </FormSettings>
+    </FormSettings>-->
 
     <Permissions>ReadWriteItem</Permissions>
-    <Rule xsi:type="RuleCollection" Mode="Or">
-        <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit"/>
-        <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Edit"/>
-    </Rule>
+    <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Edit" />
+<!--    <Rule xsi:type="RuleCollection" Mode="AND">-->
+<!--        <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Edit"/>-->
+<!--    </Rule>-->
     <DisableEntityHighlighting>false</DisableEntityHighlighting>
 
     <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides"
