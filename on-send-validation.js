@@ -41,6 +41,7 @@ Office.initialize = function () {
 
 function itemSendHandler(event) {
     if (mailboxItem.itemType === ITEM_TYPE.APPOINTMENT) {
+        mailboxItem.requiredAttendees.getAsync({ asyncContext: event }, check1RequiredAttendees);
 
         function check1RequiredAttendees(requiredAttendeesResult) {
             if (requiredAttendeesResult.status === Office.AsyncResultStatus.Succeeded) {
@@ -72,9 +73,9 @@ function itemSendHandler(event) {
         function check3Location(locationResult) {
             if (locationResult.status === Office.AsyncResultStatus.Succeeded) {
                 const location = locationResult.value;
-                const containsWebConfInLocation = webConferencingRegex.test(location.toLowerCase());
+                const containsWebConferencingInLocation = webConferencingRegex.test(location.toLowerCase());
 
-                if (!containsWebConfInLocation) {
+                if (!containsWebConferencingInLocation) {
                     mailboxItem.body.getAsync('html', { asyncContext: locationResult.asyncContext }, check4Body);
                 } else {
                     confirmationAndAddCoordinator(locationResult.asyncContext);
@@ -85,11 +86,9 @@ function itemSendHandler(event) {
         }
 
         function check4Body(bodyResult) {
-            const body = bodyResult.value;
-            const lowerCaseBody = body.toLowerCase();
-            const containsWebConf = webConferencingRegex.test(lowerCaseBody);
+            const containsWebConferencing = webConferencingRegex.test(bodyResult.value.toLowerCase());
 
-            if (!containsWebConf) {
+            if (!containsWebConferencing) {
                 sendInvite(bodyResult.asyncContext);
             } else {
                 confirmationAndAddCoordinator(bodyResult.asyncContext);
@@ -97,8 +96,7 @@ function itemSendHandler(event) {
         }
 
         function confirmationAndAddCoordinator(event) {
-            const addGongAutomatically = localStorage.getItem(LOCAL_STORAGE.KEY);
-            if (addGongAutomatically != null && addGongAutomatically === LOCAL_STORAGE.TRUE_VALUE) {
+            if(alwaysAddGongToInvite()){
                 addGongCoordinator(event);
             } else {
                 Office.context.ui.displayDialogAsync(URL.ADD_IN_DOMAIN + URL.SCHEDULING_DIALOG, {
@@ -112,6 +110,7 @@ function itemSendHandler(event) {
                         const dialog = asyncResult.value;
                         dialog.addEventHandler(Office.EventType.DialogMessageReceived, function (messageEvent) {
                             dialog.close();
+                            // handle message from dialog (scheduling-dialog.html)
                             if (messageEvent.message) {
                                 addGongCoordinator(event);
                             }
@@ -124,6 +123,11 @@ function itemSendHandler(event) {
                     }
                 });
             }
+        }
+
+        function alwaysAddGongToInvite(){
+            const addGongAutomatically = localStorage.getItem(LOCAL_STORAGE.KEY);
+            return addGongAutomatically != null && addGongAutomatically === LOCAL_STORAGE.TRUE_VALUE;
         }
 
         function addGongCoordinator(event) {
@@ -148,8 +152,6 @@ function itemSendHandler(event) {
                 return attendee.emailAddress === GONG_COORDINATOR.EMAIL
             });
         }
-
-        mailboxItem.requiredAttendees.getAsync({ asyncContext: event }, check1RequiredAttendees);
     } else {
         event.completed({ allowEvent: true });
     }
