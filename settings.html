@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <link href="https://gong-for-linkedin.s3.amazonaws.com/on-send.css" rel="stylesheet"/>
+</head>
+
+<body id='settings'>
+    <div class='settings__container'>
+        <div class='main-content__text'>
+            <p> Add the Gong coordinator to your meetings - in one click.</p>
+            <span> Gong checks LinkedIn's recording settings to see if the meeting should be recorded.</span>
+            <br>
+            <span>If so, Gong joins and records the meeting, and then analyzes and makes it available in Gong.</span>
+        </div>
+        <div class="main-content__footer">
+            <label class="checkbox-container">
+                <input class="checkbox" type="checkbox" id="inviteAlways">
+                <span class="checkmark"></span>
+            </label>
+            <div class='main-content__footer-text main-content__footer-title'>
+                Always invite Gong to my customer meetings
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    /* global Office */
+    Office.onReady(function () {
+        const checkbox = document.getElementById('inviteAlways');
+
+        const addGongAutomatically = localStorage.getItem('linkedin-add-in_always_invite_gong');
+        if (addGongAutomatically != null && addGongAutomatically === 'true') {
+            checkbox.checked = true;
+        }
+
+        checkbox.addEventListener('change', function () {
+            if (this.checked) {
+                localStorage.setItem('linkedin-add-in_always_invite_gong', 'true');
+            } else {
+                localStorage.setItem('linkedin-add-in_always_invite_gong', 'false');
+            }
+        });
+    });
+
+</script>
+</html>
