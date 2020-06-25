@@ -34,9 +34,6 @@
 
     <Permissions>ReadWriteItem</Permissions>
     <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Edit" />
-<!--    <Rule xsi:type="RuleCollection" Mode="AND">-->
-<!--        <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Edit"/>-->
-<!--    </Rule>-->
     <DisableEntityHighlighting>false</DisableEntityHighlighting>
 
     <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides"
