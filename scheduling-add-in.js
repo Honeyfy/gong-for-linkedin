@@ -29,7 +29,7 @@ const LOCAL_STORAGE = {
 }
 const URL = {
     ADD_IN_DOMAIN: 'https://gong-for-linkedin.s3.amazonaws.com/',
-    SCHEDULING_DIALOG: 'validation-dialog.html'
+    SCHEDULING_DIALOG: 'scheduling-add-in-dialog.html'
 }
 // A Flag to indicate if there is External Attendee
 let containsExternalAttendee;
@@ -110,7 +110,7 @@ function itemSendHandler(event) {
                         const dialog = asyncResult.value;
                         dialog.addEventHandler(Office.EventType.DialogMessageReceived, function (messageEvent) {
                             dialog.close();
-                            // handle message from dialog (scheduling-dialog.html)
+                            // handle message from dialog (scheduling-add-in-dialog.html)
                             if (messageEvent.message) {
                                 addGongCoordinator(event);
                             }

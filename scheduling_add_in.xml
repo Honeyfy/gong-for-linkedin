@@ -23,14 +23,14 @@
             <Set Name="Mailbox" MinVersion="1.1"/>
         </Sets>
     </Requirements>
-    <!--<FormSettings>
+    <FormSettings>
         <Form xsi:type="ItemRead">
             <DesktopSettings>
                 <SourceLocation DefaultValue="https://gong-for-linkedin.s3.amazonaws.com/settings.html"/>
                 <RequestedHeight>250</RequestedHeight>
             </DesktopSettings>
         </Form>
-    </FormSettings>-->
+    </FormSettings>
 
     <Permissions>ReadWriteItem</Permissions>
     <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Edit" />
@@ -83,8 +83,8 @@
                     <bt:Image id="logo.80x80" DefaultValue="https://gong-for-linkedin.s3.amazonaws.com/assets/logo80.png"/>
                 </bt:Images>
                 <bt:Urls>
-                    <bt:Url id="OnSend.Url" DefaultValue="https://gong-for-linkedin.s3.amazonaws.com/on-send-validation.html"/>
-                    <bt:Url id="Taskpane.Url" DefaultValue="https://gong-for-linkedin.s3.amazonaws.com/settings.html" />
+                    <bt:Url id="OnSend.Url" DefaultValue="https://gong-for-linkedin.s3.amazonaws.com/scheduling-add-in.html"/>
+                    <bt:Url id="Taskpane.Url" DefaultValue="https://gong-for-linkedin.s3.amazonaws.com/scheduling-add-in-settings.html" />
                 </bt:Urls>
                 <bt:ShortStrings>
                     <bt:String id="GroupLabel" DefaultValue="Gong"/>
@@ -143,8 +143,8 @@
                     <bt:Image id="logo.80x80" DefaultValue="https://gong-for-linkedin.s3.amazonaws.com/assets/logo80.png"/>
                 </bt:Images>
                 <bt:Urls>
-                    <bt:Url id="OnSend.Url" DefaultValue="https://gong-for-linkedin.s3.amazonaws.com/on-send-validation.html"/>
-                    <bt:Url id="Taskpane.Url" DefaultValue="https://gong-for-linkedin.s3.amazonaws.com/settings.html" />
+                    <bt:Url id="OnSend.Url" DefaultValue="https://gong-for-linkedin.s3.amazonaws.com/scheduling-add-in.html"/>
+                    <bt:Url id="Taskpane.Url" DefaultValue="https://gong-for-linkedin.s3.amazonaws.com/scheduling-add-in-settings.html" />
                 </bt:Urls>
                 <bt:ShortStrings>
                     <bt:String id="GroupLabel" DefaultValue="Gong"/>
