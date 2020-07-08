@@ -110,7 +110,7 @@ function itemSendHandler(event) {
         }
         function openDialog(event){
             Office.context.ui.displayDialogAsync(URL.ADD_IN_DOMAIN + URL.SCHEDULING_DIALOG, {
-                height: 65,
+                height: 60,
                 width: 30,
                 displayInIframe: true,
             }, function (asyncResult) {
