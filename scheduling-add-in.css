@@ -19,7 +19,7 @@
     font-weight: normal;
     font-size: 24px;
     line-height: 29px;
-    margin: 1em 0 0;
+    margin: 4vh 0 0;
 }
 
 .main-content__text {
@@ -31,7 +31,7 @@
     text-align: center;
     color: #636467;
     width: 90%;
-    margin-top: 1em;
+    margin-top: 3vh;
     font-size: 14px;
 }
 
@@ -41,7 +41,7 @@
     border-radius: 4px;
     display: flex;
     flex-direction: row;
-    margin-top: 2em;
+    margin-top: 8vh;
     width: 100%;
     justify-content: center;
 }
@@ -77,14 +77,14 @@
     border: none;
     text-transform: uppercase;
     font-weight: 500;
-    margin-top: 2em;
+    margin-top: 5vh;
     letter-spacing: 1px;
     cursor: pointer;
 }
 
 .main-content__link {
     color: #84729B;
-    margin-top: 2em;
+    margin-top: 5vh;
     cursor: pointer;
     line-height: 20px;
     text-align: center;

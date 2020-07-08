@@ -19,7 +19,7 @@ const webConferencingDomains = new Array(
 const webConferencingRegex = new RegExp('\\b(' + webConferencingDomains.join('|') + ')\\b');
 const linkedinDomains = new Array('linkedin\\.com$', 'linkedin\\.biz$', 'glintinc\\.com$');
 const linkedinDomainsRegex = new RegExp(linkedinDomains.join('|'));
-const GONG_COORDINATOR = { NAME: 'Gong Coordinator', EMAIL: 'coordinator@gong.io' };
+const GONG_COORDINATOR = { NAME: 'Gong Coordinator', EMAIL: 'coordinator@inbound.gong.io' };
 const ITEM_TYPE = {
     APPOINTMENT: 'appointment',
 }
@@ -98,36 +98,40 @@ function itemSendHandler(event) {
         function confirmationAndAddCoordinator(event) {
             if(alwaysAddGongToInvite()){
                 addGongCoordinator(event);
+                sendInvite(event);
             } else {
-                Office.context.ui.displayDialogAsync(URL.ADD_IN_DOMAIN + URL.SCHEDULING_DIALOG, {
-                    height: 70,
-                    width: 30,
-                    displayInIframe: true,
-                }, function (asyncResult) {
-                    if (asyncResult.status === Office.AsyncResultStatus.Failed) {
-                        console.error(asyncResult.error.message);
-                    } else {
-                        const dialog = asyncResult.value;
-                        dialog.addEventHandler(Office.EventType.DialogMessageReceived, function (messageEvent) {
-                            dialog.close();
-                            // handle message from dialog (scheduling-add-in-dialog.html)
-                            if (messageEvent.message) {
-                                addGongCoordinator(event);
-                            }
-                            sendInvite(event);
-                        });
-                        dialog.addEventHandler(Office.EventType.DialogEventReceived, function () {
-                            dialog.close();
-                            sendInvite(event);
-                        });
-                    }
-                });
+                openDialog(event);
             }
         }
 
         function alwaysAddGongToInvite(){
             const addGongAutomatically = localStorage.getItem(LOCAL_STORAGE.KEY);
             return addGongAutomatically != null && addGongAutomatically === LOCAL_STORAGE.TRUE_VALUE;
+        }
+        function openDialog(event){
+            Office.context.ui.displayDialogAsync(URL.ADD_IN_DOMAIN + URL.SCHEDULING_DIALOG, {
+                height: 65,
+                width: 30,
+                displayInIframe: true,
+            }, function (asyncResult) {
+                if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+                    console.error(asyncResult.error.message);
+                } else {
+                    const dialog = asyncResult.value;
+                    dialog.addEventHandler(Office.EventType.DialogMessageReceived, function (messageEvent) {
+                        dialog.close();
+                        // handle message from dialog (scheduling-add-in-dialog.html)
+                        if (messageEvent.message) {
+                            addGongCoordinator(event);
+                        }
+                        sendInvite(event);
+                    });
+                    dialog.addEventHandler(Office.EventType.DialogEventReceived, function () {
+                        dialog.close();
+                        sendInvite(event);
+                    });
+                }
+            });
         }
 
         function addGongCoordinator(event) {
